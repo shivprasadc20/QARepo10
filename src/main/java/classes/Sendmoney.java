@@ -49,7 +49,7 @@ public class Sendmoney extends Basefunction {
         enteramount.sendKeys("" + amount +"");
         enteramount.sendKeys(Keys.ENTER);
 //        sendmoneyclick.click();
-//        Thread.sleep(2000);
+        Thread.sleep(2000);
     }
     public void userIsGettingCorrectReciverAmountToRecieverGetsField() {
 //       String s2= recieveramout.getText();
