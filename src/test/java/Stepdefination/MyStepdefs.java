@@ -138,13 +138,13 @@ public class MyStepdefs {
     public void userIsNavigateToPasswordPageToSetPassword() {
         sp.userIsNavigateToPasswordPageToSetPassword();
     }
-    @And("user eneters password {string} on password page")
-    public void userEnetersPasswordOnPasswordPage(String arg5) {
-        sp.userEnetersPasswordOnPasswordPage(arg5);
+    @And("user enters password {string} on password page")
+    public void userEntersPasswordOnPasswordPage(String arg5) {
+        sp.userEntersPasswordOnPasswordPage(arg5);
     }
-    @And("user eneters confirm password {string} on password page")
-    public void userEnetersConfirmPasswordOnPasswordPage(String arg6) {
-       sp.userEnetersConfirmPasswordOnPasswordPage(arg6);
+    @And("user enters confirm password {string} on password page")
+    public void userEntersConfirmPasswordOnPasswordPage(String arg6) {
+       sp.userEntersConfirmPasswordOnPasswordPage(arg6);
     }
     @Given("Signup button is visible")
     public void signupButtonIsVisible() throws IOException {
@@ -157,5 +157,47 @@ public class MyStepdefs {
     @Then("User is navigating to sign up send money page")
     public void userIsNavigatingToSignUpSendMoneyPage() throws IOException, InterruptedException {
         sp.userIsNavigatingToSignUpSendMoneyPage();
+    }
+    @Given("Send money button is visible")
+    public void sendMoneyButtonIsVisible() {
+       sp.sendMoneyButtonIsVisible();
+    }
+    @When("User click on Send money button")
+    public void userClickOnSendMoneyButton() throws InterruptedException {
+     sp.userClickOnSendMoneyButton();
+    }
+    @Then("User is navigating to personal details about me page.")
+    public void userIsNavigatingToPersonalDetailsAboutMePage() throws IOException {
+    sp.userIsNavigatingToPersonalDetailsAboutMePage();
+    }
+    @Given("User enters {string} in my age text field")
+    public void userEntersInMyAgeTextField(String arg9) {
+        sp.userEntersInMyAgeTextField(arg9);
+    }
+    @Then("Verify correct DOB is reflecting in My Date of birth field")
+    public void verifyCorrectDOBIsReflectingInMyDateOfBirthField() {
+        sp.verifyCorrectDOBIsReflectingInMyDateOfBirthField();
+    }
+    @Given("User selects Gender from my gender section")
+    public void userSelectsGenderFromMyGenderSection() {
+sp.userSelectsGenderFromMyGenderSection();
+    }
+    @Given("User enters {string} in My Social Security Number field")
+    public void UserEntersInMySocialSecurityNumberField(String arg10) {
+        sp.UserEntersInMySocialSecurityNumberField(arg10);
+    }
+    @Given("User is able to select count of citizenship")
+    public void userIsAbleToSelectCountOfCitizenship() throws IOException, InterruptedException {
+        sp.userIsAbleToSelectCountOfCitizenship();
+
+    }
+    @Given("My Annual income drop down with options is visible")
+    public void myAnnualIncomeDropDownWithOptionsIsVisible() throws IOException {
+        sp.myAnnualIncomeDropDownWithOptionsIsVisible();
+    }
+    @And("user selects income from drop down option")
+    public void userSelectsIncomeFromDropDownOption() throws IOException {
+        sp.userSelectsIncomeFromDropDownOption();
+
     }
 }
