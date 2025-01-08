@@ -271,23 +271,23 @@ public class SignUp extends Basefunction {
         Thread.sleep(1000);
         india.click();
     }
-//    public void myAnnualIncomeDropDownWithOptionsIsVisible() throws IOException {
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-//        // Wait until the dropdown element is clickable and then click it
-//        WebElement income = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='css-1dbjc4n r-848iym r-bnwqim r-1co9hmh']" +
-//                "/div[text()='My Annual Income']")));
-//        income.click(); // Take a screenshot after opening the dropdown screenshot(driver,"incomelist");
-//        // Wait for the options to be visible and then find all the options
-//        List<WebElement> incomeOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='css-901oao r-1larm2r r-wbaqdt']")));
-//        // Loop through each option and print its value
-//        for (WebElement option : incomeOptions) {
-//            System.out.println(option.getText());
-//            if (option.getText().equalsIgnoreCase("0-50,000 USD")) {
-//                option.click(); break;
-//                // Exit the loop after selecting the option
-//                }
-//        }
-//    }
+    public void myAnnualIncomeDropDownWithOptionsIsVisible() throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        // Wait until the dropdown element is clickable and then click it
+        WebElement income = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='css-1dbjc4n r-848iym r-bnwqim r-1co9hmh']" +
+                "/div[text()='My Annual Income']")));
+        income.click(); // Take a screenshot after opening the dropdown screenshot(driver,"incomelist");
+        // Wait for the options to be visible and then find all the options
+        List<WebElement> incomeOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='css-901oao r-1larm2r r-wbaqdt']")));
+        // Loop through each option and print its value
+        for (WebElement option : incomeOptions) {
+            System.out.println(option.getText());
+            if (option.getText().equalsIgnoreCase("0-50,000 USD")) {
+                option.click(); break;
+                // Exit the loop after selecting the option
+                }
+        }
+    }
     public void userSelectsIncomeFromDropDownOption() throws IOException {
         WebElement occupation= driver.findElement(By.xpath("//div[@class=\"css-1dbjc4n r-848iym r-bnwqim r-1co9hmh\"]" +
                 "/div[contains(text(),\"My Occupation\")]"));
