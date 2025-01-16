@@ -4,8 +4,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -63,7 +63,7 @@ public class SignUp extends Basefunction {
     @FindBy(xpath = "//div[@class='css-1dbjc4n r-1awozwy r-z2wwpe r-1777fci r-d9fdf6']" +
             "//div[@id='nca_send_money']//div[@id='nca_send_money']")
     private WebElement sendmoneybtn;
-//    @FindBy(xpath = "//div[text()=\"My Age\"]")
+    //    @FindBy(xpath = "//div[text()=\"My Age\"]")
 //    private WebElement myagefield;
 //    @FindBy(xpath = "//div[@class='css-1dbjc4n r-eqz5dr r-1wcu1vj r-gmdvlt']//input[@aria-label='See an informative alert']")
 //    private WebElement mydob;
@@ -181,10 +181,12 @@ public class SignUp extends Basefunction {
         System.out.println(signup.getText());
         screenshot(driver, "password page");
     }
+
     public void userClickOnSignupButton() throws InterruptedException {
         signup.click();
         Thread.sleep(8000);
     }
+
     public void userIsNavigatingToSignUpSendMoneyPage() throws InterruptedException, IOException {
         String currenturl1 = "https://money2indiauat.icicibank.com/usa/send-money-for-new-user";
         String Expectedurl1 = driver.getCurrentUrl();
@@ -200,10 +202,12 @@ public class SignUp extends Basefunction {
     public void sendMoneyButtonIsVisible() {
         System.out.println(sendmoneybtn.getText());
     }
+
     public void userClickOnSendMoneyButton() throws InterruptedException {
         sendmoneybtn.click();
         Thread.sleep(3000);
     }
+
     public void userIsNavigatingToPersonalDetailsAboutMePage() throws IOException {
         String currenturl2 = "https://money2indiauat.icicibank.com/usa/personal-detail";
         String expectedurl2 = driver.getCurrentUrl();
@@ -215,16 +219,18 @@ public class SignUp extends Basefunction {
             driver.quit();
         }
     }
+
     public void userEntersInMyAgeTextField(String arg9) {
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         // Wait for the input element within the div that has the text "My Age"
         WebElement myAgeField = wait.until(ExpectedConditions.elementToBeClickable
                 (By.xpath("//div[text()='My Age']/following-sibling::input")));
         myAgeField.sendKeys(arg9);
     }
+
     public void verifyCorrectDOBIsReflectingInMyDateOfBirthField() {
         String actualdob = "07/01/1991";
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement mydob = wait.until(ExpectedConditions.elementToBeClickable
                 (By.xpath("//*[text()=\"My Date Of Birth\"]//following-sibling::input[@type=\"text\"]")));
         String expecteddob = mydob.getText();
@@ -235,15 +241,18 @@ public class SignUp extends Basefunction {
 //            driver.quit();
         }
     }
+
     public void userSelectsGenderFromMyGenderSection() {
         System.out.println(genderheading.getText());
         female.click();
         transgender.click();
         male.click();
     }
+
     public void UserEntersInMySocialSecurityNumberField(String arg10) {
         ssn.sendKeys(arg10);
     }
+
     public void userIsAbleToSelectCountOfCitizenship() throws InterruptedException, IOException {
 //        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 //        // Click on the dropdown to open options
@@ -270,39 +279,113 @@ public class SignUp extends Basefunction {
         usa.click();
         Thread.sleep(1000);
         india.click();
+
     }
-    public void myAnnualIncomeDropDownWithOptionsIsVisible() throws IOException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        // Wait until the dropdown element is clickable and then click it
-        WebElement income = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='css-1dbjc4n r-848iym r-bnwqim r-1co9hmh']" +
-                "/div[text()='My Annual Income']")));
-        income.click(); // Take a screenshot after opening the dropdown screenshot(driver,"incomelist");
-        // Wait for the options to be visible and then find all the options
-        List<WebElement> incomeOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='css-901oao r-1larm2r r-wbaqdt']")));
-        // Loop through each option and print its value
-        for (WebElement option : incomeOptions) {
-            System.out.println(option.getText());
-            if (option.getText().equalsIgnoreCase("0-50,000 USD")) {
-                option.click(); break;
-                // Exit the loop after selecting the option
-                }
-        }
+
+    public void myAnnualIncomeDropDownWithOptionsIsVisible() throws IOException, InterruptedException {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+        WebElement element = driver.findElement(By.xpath
+                ("//textarea[contains(@class,\"input css-1cwyjr8 r-1niwhzg r-1a80roc r-ndvcnb r-855088 r-17gur6a r-114ovsg r-1c1gj4h r-rs99b7 r-1larm2r r-wbaqdt r-ubezar r-eu3ka r-1777fci r-1x0uki6\")]"));
+
+        // Get the top-left corner of the element
+        Point location = element.getLocation();
+        int x = location.getX();
+        int y = location.getY();
+        // Get the element size
+        Dimension size = element.getSize();
+        int width = size.getWidth();
+        int height = size.getHeight();
+        int centerX = x + (width / 2);
+        int centerY = y + (height / 2);
+        Actions actions = new Actions(driver);
+        actions.moveByOffset(centerX, centerY).click().perform();
+
+        screenshot(driver,"incomeoptions");
+//      ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+//           wait.until(ExpectedConditions.elementToBeClickable(By.xpath
+//                   ("//textarea[contains(@class,\"input css-1cwyjr8 r-1niwhzg r-1a80roc r-ndvcnb r-855088 r-17gur6a r-114ovsg r-1c1gj4h r-rs99b7 r-1larm2r r-wbaqdt r-ubezar r-eu3ka r-1777fci r-1x0uki6\")]"))).click();
     }
-    public void userSelectsIncomeFromDropDownOption() throws IOException {
-        WebElement occupation= driver.findElement(By.xpath("//div[@class=\"css-1dbjc4n r-848iym r-bnwqim r-1co9hmh\"]" +
-                "/div[contains(text(),\"My Occupation\")]"));
-        occupation.click();
-        screenshot(driver,"ocuupationlist");
-        List<WebElement> occupationoptions=driver.findElements(By.xpath("//div[@class=\"css-1dbjc4n r-18wd4mo r-qklmqi r-18u37iz r-1sp51qo\"]" +
-                "/div[@class=\"css-901oao r-1larm2r r-wbaqdt\"]"));
-        for(WebElement occupationoptions1:occupationoptions)
+    public void userSelectsIncomeFromDropDownOption() throws IOException, InterruptedException
+    {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        List<WebElement> incomeOptions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath
+                ("//div[contains(text(),'USD')]")));
+        for (WebElement option : incomeOptions)
         {
-            System.out.println(occupationoptions1.getText());
-            if(occupationoptions1.getText().equalsIgnoreCase("Accountant"))
+            System.out.println(option.getText());
+            if (option.getText().equalsIgnoreCase("100,001-150,000 USD"))
             {
-                occupationoptions1.click();
+                option.click();
+//                break; // Exit the loop after selecting the option
             }
         }
+        Thread.sleep(10000);
+    }
+    public void myOccupationListDropDownWithOptionsIsVisible() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        WebElement occupation = wait.until(ExpectedConditions.elementToBeClickable(
+                (By.xpath("//textarea[@class=\"input css-1cwyjr8 r-1niwhzg r-1a80roc r-ndvcnb r-855088 r-17gur6a r-114ovsg " +
+                        "r-1c1gj4h r-rs99b7 r-1larm2r r-wbaqdt r-ubezar r-1777fci r-1mnahxq\"]"))));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", occupation);
+        Thread.sleep(4000);
+    occupation.click();
+//        Point location = occupation.getLocation();
+//        Dimension size = occupation.getSize();
+//        int elementX = location.getX();
+//        int elementY = location.getY();
+//        int elementWidth = size.getWidth();
+//        int elementHeight = size.getHeight();
+//        System.out.println(elementHeight);
+//        System.out.println(elementWidth);
+//        // Calculate the desired coordinates (e.g., click at 30% width and 50% height)
+//        int clickX = elementX + (int) (elementWidth * 0.7); // 30% of width
+//        int clickY = elementY + (int) (elementHeight * 0.5); // 50% of height
+
+        // Execute JavaScript to click on the calculated point
+//        js.executeScript("arguments[0].click();", occupation);
+
+        // Optionally, click at a specific calculated point using coordinates
+//        js.executeScript("var elem = arguments[0];" +
+//                "var rect = elem.getBoundingClientRect();" +
+//                "var x = rect.left + arguments[1];" +
+//                "var y = rect.top + arguments[2];" +
+//                "var clickEvent = new MouseEvent('click', {" +
+//                "'clientX': x," +
+//                "'clientY': y," +
+//                "'bubbles': true," +
+//                "'cancelable': true" +
+//                "});" +
+//                "elem.dispatchEvent(clickEvent);", occupation, clickX, clickY);
+//
+    }
+      public void userEntersNameNameInEmployerNameTextField(String name) throws IOException {
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("" +
+                        "//input[@class=\"input css-1cwyjr8 r-1niwhzg r-1a80roc r-qklmqi r-855088 r-17gur6a r-114ovsg r-1c1gj4h r-rs99b7 r-1larm2r r-wbaqdt r-ubezar r-1777fci r-1x0uki6\"]")))
+                .sendKeys(name);
+//        WebElement empname= driver.findElement(By.xpath("//div[contains(text(),\"Employer Name\")]"));
+          screenshot(driver,"employername");
+
+    }
+    public void clickOnCurrentAddressButton() {
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+        WebElement currentaddress= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()=\"Current Address  >\"]")));
+        currentaddress.click();
+    }
+    public void navigateToMyCurrentAddressPage() {
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(20));
+       WebElement text1=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[text()=\"My Current Address\"]")));
+       boolean text2=text1.isDisplayed();
+       if(text2==true)
+       {
+           System.out.println("text is dispalyed:"+ text1.getText());
+       }
+       else {
+           System.out.println("testcase failed");
+           driver.quit();
+       }
     }
 }
-

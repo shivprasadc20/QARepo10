@@ -192,12 +192,32 @@ sp.userSelectsGenderFromMyGenderSection();
 
     }
     @Given("My Annual income drop down with options is visible")
-    public void myAnnualIncomeDropDownWithOptionsIsVisible() throws IOException {
+    public void myAnnualIncomeDropDownWithOptionsIsVisible() throws IOException, InterruptedException {
         sp.myAnnualIncomeDropDownWithOptionsIsVisible();
     }
     @And("user selects income from drop down option")
-    public void userSelectsIncomeFromDropDownOption() throws IOException {
+    public void userSelectsIncomeFromDropDownOption() throws IOException, InterruptedException {
         sp.userSelectsIncomeFromDropDownOption();
 
+    }
+
+    @Given("My Occupation list drop down with options is visible")
+    public void myOccupationListDropDownWithOptionsIsVisible() throws InterruptedException {
+        sp.myOccupationListDropDownWithOptionsIsVisible();
+    }
+
+    @Given("user enters name {string} in Employer name text field")
+    public void userEntersNameNameInEmployerNameTextField(String name) throws IOException {
+        sp.userEntersNameNameInEmployerNameTextField(name);
+        
+    }
+
+    @And("Click on Current address button")
+    public void clickOnCurrentAddressButton() {
+        sp.clickOnCurrentAddressButton();
+    }
+
+    @Then("navigate to my current address page")
+    public void navigateToMyCurrentAddressPage() {sp.navigateToMyCurrentAddressPage();
     }
 }
